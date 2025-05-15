@@ -40,7 +40,7 @@ namespace Ghostscript.NET.PDFA3Converter.Samples
             Console.WriteLine("Running FacturXWithZUGFeRDcsharpSample");
             string outFilename = "my-factur-x-zugferd-sample.xml";
             InvoiceDescriptor invoice = CreateInvoice();
-            invoice.Save(outFilename, ZUGFeRDVersion.Version22, s2industries.ZUGFeRD.Profile.Comfort);
+            invoice.Save(outFilename, ZUGFeRDVersion.Version23, s2industries.ZUGFeRD.Profile.Comfort);
 
             string gsFilePath = @"C:\Program Files\gs\gs10.05.0\bin\gsdll64.dll";
             Console.WriteLine("Using Ghostscript filepath: "+ gsFilePath);
@@ -119,17 +119,19 @@ namespace Ghostscript.NET.PDFA3Converter.Samples
             //desc.AddDebitorFinancialAccount(iban: "DB02120300000000202051", bic: "DBBYLADEM1001", bankName: "KundenDB AG");
             desc.AddApplicableTradeTax(basisAmount: 275.0m,
                                  percent: 7m,
+                                 taxAmount: 19.25m,
                                  typeCode: TaxTypes.VAT,
                                  categoryCode: TaxCategoryCodes.S
                                  );
 
             desc.AddApplicableTradeTax(basisAmount: 198.0m,
                                        percent: 19m,
+                                       taxAmount: 37.62m,
                                        typeCode: TaxTypes.VAT,
                                        categoryCode: TaxCategoryCodes.S
                                        );
 
-            desc.SetTradePaymentTerms("Zahlbar innerhalb 30 Tagen netto bis 04.04.2018, 3% Skonto innerhalb 10 Tagen bis 15.03.2018");
+            desc.AddTradePaymentTerms("Zahlbar innerhalb 30 Tagen netto bis 04.04.2018, 3% Skonto innerhalb 10 Tagen bis 15.03.2018");
             desc.SetTotals(lineTotalAmount: 473.0m,
                            taxBasisAmount: 473.0m,
                            taxTotalAmount: 56.87m,
